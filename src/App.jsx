@@ -5,6 +5,7 @@ import Projects from './pages/Projects';
 import Certificates from './pages/Certificates';
 import About from './pages/About'; 
 import Contact from './pages/Contact'; 
+import ResumeViewer from './pages/ResumeViewer'; // <-- Naya Resume Page
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/certificates" element={<Certificates />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/resume" element={<ResumeViewer />} /> {/* <-- Naya Route */}
           </Routes>
         </main>
         <footer className="py-8 bg-slate-950 border-t border-slate-900 text-center text-slate-500 text-sm mt-auto">

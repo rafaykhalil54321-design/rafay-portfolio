@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const location = useLocation();
 
-  const navLinks = [
+  const links = [
     { name: 'Home', path: '/' },
     { name: 'Projects', path: '/projects' },
     { name: 'About', path: '/about' },
@@ -15,69 +15,61 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 text-white">
+    <nav className="fixed w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex justify-between items-center h-20">
+          
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <NavLink to="/" className="text-2xl font-bold tracking-tighter text-teal-400">
-              Rafay<span className="text-white">.dev</span>
-            </NavLink>
-          </div>
+          <Link to="/" className="text-2xl font-extrabold text-white">
+            Rafay<span className="text-teal-400">.dev</span>
+          </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.name}
-                  to={link.path}
-                  className={({ isActive }) =>
-                    `transition-colors duration-300 ${
-                      isActive ? "text-teal-400 font-semibold" : "text-gray-300 hover:text-white"
-                    }`
-                  }
-                >
-                  {link.name}
-                </NavLink>
-              ))}
-              <a 
-                href="/resume.pdf" 
-                target="_blank" 
-                rel="noreferrer"
-                className="px-4 py-2 rounded-md bg-teal-500 hover:bg-teal-600 text-white font-medium transition-colors duration-300"
+          <div className="hidden md:flex items-center space-x-8">
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`${
+                  location.pathname === link.path
+                    ? 'text-teal-400 font-bold'
+                    : 'text-slate-300 hover:text-teal-400'
+                } transition-colors duration-300 font-medium`}
               >
-                Resume
-              </a>
-            </div>
+                {link.name}
+              </Link>
+            ))}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <button onClick={toggleMenu} className="text-gray-300 hover:text-white focus:outline-none">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-slate-300 hover:text-teal-400 focus:outline-none"
+            >
               {isOpen ? <FiX size={28} /> : <FiMenu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-slate-900 border-t border-slate-800">
+        <div className="md:hidden bg-slate-900 border-b border-slate-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
-              <NavLink
+            {links.map((link) => (
+              <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  `block px-3 py-2 rounded-md text-base font-medium ${
-                    isActive ? "text-teal-400 bg-slate-800" : "text-gray-300 hover:text-white hover:bg-slate-800"
-                  }`
-                }
+                className={`${
+                  location.pathname === link.path
+                    ? 'bg-slate-800 text-teal-400'
+                    : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                } block px-3 py-2 rounded-md text-base font-medium transition-colors`}
               >
                 {link.name}
-              </NavLink>
+              </Link>
             ))}
           </div>
         </div>
