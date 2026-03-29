@@ -15,7 +15,7 @@ const Projects = () => {
       desc: 'A comprehensive mobile application featuring AI plant identification, disease diagnosis, and smart watering calculations. Integrated with Web3 Crypto Wallets for premium subscriptions. \n\n👉 This project is built using advanced frontend architecture with concepts inspired by React.js, Node.js, and modern full-stack development practices.',
       tech: ['React Native', 'Laravel', 'OpenAI API', 'MySQL'],
       link: '#', 
-      image: '/images/plantie.png' 
+      image: '/images/16.jpeg' 
     },
     {
       id: 1,
