@@ -9,7 +9,7 @@ const Certificates = () => {
   // Categories list
   const categories = ['All', 'Internships', 'Udemy', 'University', 'Sports', 'Education'];
 
-  // Certificates Data (Exact names from your VS Code screenshot)
+  // Certificates Data
   const certificatesData = [
     // --- INTERNSHIPS (I) ---
     { id: 1, title: 'Back End Development', issuer: 'DevelopersHub Corporation', image: '/certificates/1I.png', category: 'Internships' },
@@ -34,7 +34,10 @@ const Certificates = () => {
     { id: 14, title: 'Certificate of Merit', issuer: 'Fazaia Degree College', image: '/certificates/13S.png', category: 'Sports' },
     { id: 15, title: 'Sports Certificate', issuer: 'Nisar Shaheed School', image: '/certificates/S10.png', category: 'Sports' },
     
-    // Note: Agar koi file miss ho gayi ho, toh aap is array mein copy-paste kar ke add kar sakte hain.
+    // --- EDUCATION (E) - New Additions ---
+    { id: 16, title: 'HSSC Pre-Engineering (Part-II)', issuer: 'BISE Mardan • 733/1100 Marks', image: '/images/E2.jpeg', category: 'Education' },
+    { id: 17, title: 'HSSC Pre-Engineering (Part-I)', issuer: 'BISE Mardan • 395/550 Marks', image: '/images/E1.jpeg', category: 'Education' },
+    { id: 18, title: 'SSC Science (Matriculation)', issuer: 'FBISE Islamabad • Grade A1', image: '/images/E3.jpeg', category: 'Education' }
   ];
 
   // Filter logic
@@ -81,18 +84,6 @@ const Certificates = () => {
         {/* Certificates Grid */}
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>
-            {/* If Education is selected and it's empty */}
-            {activeCategory === 'Education' && (
-              <motion.div 
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                className="col-span-full flex flex-col items-center justify-center py-20 bg-slate-900/50 border border-slate-800 border-dashed rounded-2xl"
-              >
-                <FiAward className="text-6xl text-slate-600 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Academic Degrees Coming Soon</h3>
-                <p className="text-slate-400 text-center max-w-md">I will be uploading my formal education degrees and transcripts in this section shortly.</p>
-              </motion.div>
-            )}
-
             {/* Render Filtered Certificates */}
             {filteredCertificates.map((cert) => (
               <motion.div
@@ -113,6 +104,10 @@ const Certificates = () => {
                     src={cert.image} 
                     alt={cert.title} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                    onError={(e) => {
+                      e.target.onerror = null; 
+                      e.target.src = "https://via.placeholder.com/600x400/0f172a/14b8a6?text=Image+Coming+Soon";
+                    }}
                   />
                   {/* Overlay on hover */}
                   <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -147,7 +142,7 @@ const Certificates = () => {
           >
             {/* Close Button */}
             <button 
-              className="absolute top-6 right-6 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition-colors"
+              className="absolute top-6 right-6 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-2 rounded-full transition-colors z-50"
               onClick={() => setSelectedImage(null)}
             >
               <FiX size={24} />
