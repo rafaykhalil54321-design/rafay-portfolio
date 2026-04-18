@@ -4,10 +4,20 @@ import { FiExternalLink, FiInfo, FiZoomIn, FiX, FiCode } from 'react-icons/fi';
 
 const Projects = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null); // Detail modal ke liye
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  // 🚀 Full Portfolio Projects Data (15 Projects + Plantie)
+  // 🚀 Full Portfolio Projects Data (16 Projects + ProctorIQ)
   const projectsData = [
+    {
+      id: 'proctoriq',
+      title: 'ProctorIQ - The Intelligent Proctoring Engine',
+      category: 'AI Application / Systems',
+      desc: 'ProctorIQ is a Real-time Cognitive Telemetry & Anti-Spoofing System. It tracks student focus, attention (yaw/pitch angles), and cheating attempts (like using a mobile phone or falling asleep) with millisecond accuracy and zero lag during online exams. \n\n👉 Featuring a Modern Full-Stack AI Architecture: \n- Frontend: React.js, Tailwind CSS, WebSockets \n- Backend: Python FastAPI, Uvicorn \n- AI Brain: Google MediaPipe (Face Mesh for focus & EAR) and YOLOv8 Nano (Parallel thread object detection for mobile phones). \n\n🔥 Killer Features: Parallel Processing Architecture, Continuous Angle Math, Data Matrix Mode, and Automated Incident Logging.',
+      tech: ['React.js', 'FastAPI', 'YOLOv8', 'MediaPipe'],
+      link: '#', 
+      image: '/images/ved.mp4', // 👈 Path Theek Kar Diya Hai (/images/ved.mp4)
+      isVideo: true
+    },
     {
       id: 'plantie',
       title: 'Plantie - AI Plant Care App',
@@ -173,7 +183,7 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* 🌟 GRID LAYOUT (Exactly like Certificates) 🌟 */}
+        {/* 🌟 GRID LAYOUT */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsData.map((project, index) => (
             <motion.div
@@ -183,20 +193,31 @@ const Projects = () => {
               transition={{ duration: 0.3, delay: index * 0.05 }}
               className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg hover:border-teal-500/50 transition-all duration-300 flex flex-col group"
             >
-              {/* Image Container */}
+              {/* Media Container (Image or Video) */}
               <div 
                 className="relative h-48 w-full overflow-hidden cursor-pointer bg-slate-800 shrink-0"
                 onClick={() => setSelectedImage(project.image)}
               >
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                  onError={(e) => {
-                    e.target.onerror = null; 
-                    e.target.src = "https://via.placeholder.com/600x400/0f172a/14b8a6?text=Image+Coming+Soon";
-                  }}
-                />
+                {project.isVideo ? (
+                   <video 
+                     src={project.image}
+                     autoPlay 
+                     loop 
+                     muted 
+                     playsInline
+                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                   />
+                ) : (
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                    onError={(e) => {
+                      e.target.onerror = null; 
+                      e.target.src = "https://via.placeholder.com/600x400/0f172a/14b8a6?text=Image+Coming+Soon";
+                    }}
+                  />
+                )}
               </div>
 
               {/* Minimal Content Container */}
@@ -219,7 +240,7 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* 🌟 3 OPTIONS BUTTON BAR 🌟 */}
+              {/* 🌟 3 OPTIONS BUTTON BAR */}
               <div className="grid grid-cols-3 border-t border-slate-800 bg-slate-950/50">
                 {/* 1. View Detail */}
                 <button 
@@ -248,7 +269,7 @@ const Projects = () => {
                   </div>
                 )}
 
-                {/* 3. Zoom Image */}
+                {/* 3. Zoom Image / Video */}
                 <button 
                   onClick={() => setSelectedImage(project.image)}
                   className="flex flex-col items-center justify-center gap-1 py-3 text-slate-400 hover:text-teal-400 hover:bg-slate-800 transition-colors"
@@ -264,7 +285,7 @@ const Projects = () => {
 
       </div>
 
-      {/* 🖼️ 1. PROJECT DETAILS MODAL (Pop-up for heavy text) */}
+      {/* 🖼️ 1. PROJECT DETAILS MODAL */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -311,7 +332,7 @@ const Projects = () => {
         )}
       </AnimatePresence>
 
-      {/* 🖼️ 2. IMAGE ZOOM LIGHTBOX */}
+      {/* 🖼️ 2. MEDIA ZOOM LIGHTBOX */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
@@ -328,15 +349,28 @@ const Projects = () => {
               <FiX size={24} />
             </button>
 
-            <motion.img
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              src={selectedImage}
-              alt="Project Zoom"
-              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-800"
-              onClick={(e) => e.stopPropagation()} 
-            />
+            {selectedImage.endsWith('.mp4') ? (
+              <motion.video
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.9 }}
+                src={selectedImage}
+                controls
+                autoPlay
+                className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-800"
+                onClick={(e) => e.stopPropagation()} 
+              />
+            ) : (
+              <motion.img
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.9 }}
+                src={selectedImage}
+                alt="Project Zoom"
+                className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl border border-slate-800"
+                onClick={(e) => e.stopPropagation()} 
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -345,4 +379,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Projects;S
