@@ -159,8 +159,8 @@ const PROJECTS = [
 ];
 
 const STATS = [
-  { value: '3+',  label: 'Years Experience', icon: FiCode },
-  { value: '30+', label: 'Projects Shipped',  icon: FiLayers },
+  { value: '3.5+',  label: 'Years Experience', icon: FiCode },
+  { value: '50+', label: 'Projects Shipped',  icon: FiLayers },
   { value: '15+', label: 'Happy Clients',     icon: FiStar },
   { value: '99%', label: 'On-time Delivery',  icon: FiZap },
 ];
@@ -922,7 +922,7 @@ const Home = () => {
                     src="/rafay.png"
                     alt="Rafay Khalil"
                     style={{
-                      width: '100%', height: '100%',
+                      width: '100%', height: '160%',
                       objectFit: 'cover',
                       transition: 'transform 0.5s ease',
                     }}
@@ -975,7 +975,7 @@ const Home = () => {
                   <div style={{
                     fontSize: 24, fontFamily: "'Syne', sans-serif",
                     fontWeight: 800, color: '#f4b942', lineHeight: 1,
-                  }}>30+</div>
+                  }}>50+</div>
                   <div style={{
                     fontSize: 11, color: '#8892a4',
                     fontFamily: "'DM Sans', sans-serif",
