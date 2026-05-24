@@ -24,6 +24,7 @@ const Certificates = () => {
     { id: 8, title: 'Super Communicator at Work', issuer: 'Udemy', image: '/certificates/9U.jpg', category: 'Udemy' },
 
     // --- UNIVERSITY & EVENTS (U - Colorful) ---
+    { id: 19, title: 'Appreciation Award - COMPPEC 2026', issuer: 'NUST College of E&ME', image: '/images/nust.jpeg', category: 'University' },
     { id: 9, title: 'SOF-TECH 2025 Participation', issuer: 'University of Technology', image: '/certificates/14U.png', category: 'University' },
     { id: 10, title: 'Youth Marathon 2023', issuer: 'Event', image: '/certificates/15U.png', category: 'University' },
     { id: 11, title: 'AWKUM Literary Fest', issuer: 'AWKUM', image: '/certificates/16U.png', category: 'University' },

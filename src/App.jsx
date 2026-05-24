@@ -6,10 +6,14 @@ import Certificates from './pages/Certificates';
 import About from './pages/About'; 
 import Contact from './pages/Contact'; 
 import ResumeViewer from './pages/ResumeViewer'; // <-- Naya Resume Page
+import ScrollToTop from './components/ScrollToTop'; // <-- Yeh line add ho gayi
 
 function App() {
   return (
     <Router>
+      {/* Har naye page par scroll ko automatically oopar (top) le jane ke liye */}
+      <ScrollToTop />
+      
       <div className="bg-slate-950 min-h-screen font-sans selection:bg-teal-500/30 selection:text-teal-200">
         <Navbar />
         <main>
