@@ -159,7 +159,7 @@ const PROJECTS = [
 ];
 
 const STATS = [
-  { value: '3.5+',  label: 'Years Experience', icon: FiCode },
+  { value: '3.0+',  label: 'Years Experience', icon: FiCode },
   { value: '50+', label: 'Projects Shipped',  icon: FiLayers },
   { value: '15+', label: 'Happy Clients',     icon: FiStar },
   { value: '99%', label: 'On-time Delivery',  icon: FiZap },
@@ -949,7 +949,7 @@ const Home = () => {
                   <div style={{
                     fontSize: 24, fontFamily: "'Syne', sans-serif",
                     fontWeight: 800, color: '#00d9b8', lineHeight: 1,
-                  }}>3.5+</div>
+                  }}>3.0+</div>
                   <div style={{
                     fontSize: 11, color: '#8892a4',
                     fontFamily: "'DM Sans', sans-serif",
